@@ -39,5 +39,15 @@ namespace Antenna
             addConnection.Owner = this;
             addConnection.ShowDialog();
         }
+
+        private void Main_FormClosed(object sender, FormClosedEventArgs e)
+        {
+
+        }
+
+        private void Button2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

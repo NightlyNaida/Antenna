@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO.Ports;
 
 namespace Antenna
@@ -40,12 +36,18 @@ namespace Antenna
             try
             {
                 portSearched[iterationSearch].Open();//Открываем порт
-                System.Threading.Thread.Sleep(2000);//таймаут пока прилетит сообщение 
-                string returnMessage = portSearched[iterationSearch].ReadLine();//считываем сообщение
+                portSearched[iterationSearch].Write("hau");//Посылаем сообщение на порт 
+                string returnMessage ="";
+                System.Threading.Thread.Sleep(2500);
+                if (portSearched[iterationSearch].BytesToRead > 0)
+                {
+                    returnMessage = portSearched[iterationSearch].ReadLine();//считываем сообщение
+                }
                 portSearched[iterationSearch].Close();//закрываем порт
+
                 if (returnMessage.Contains("It's Boot-Group Arduino"))//парсим маяк
                 {
-                    serialNumber[iterationSearch] = returnMessage.Substring(24, 8);//парсим идентификатор
+                    serialNumber[iterationSearch] = returnMessage.Substring(24, returnMessage.Length - 24);//парсим идентификатор
                     return true;
                 }
                 else

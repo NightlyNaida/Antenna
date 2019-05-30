@@ -31,6 +31,9 @@
             this.connections = new System.Windows.Forms.TabControl();
             this.offlineConnections = new System.Windows.Forms.TabPage();
             this.dataGridView_Connections = new System.Windows.Forms.DataGridView();
+            this.Adress = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Identity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Connect = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -48,9 +51,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.Adress = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Identity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Connect = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.connections.SuspendLayout();
             this.offlineConnections.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Connections)).BeginInit();
@@ -88,6 +88,24 @@
             this.dataGridView_Connections.Name = "dataGridView_Connections";
             this.dataGridView_Connections.Size = new System.Drawing.Size(466, 503);
             this.dataGridView_Connections.TabIndex = 0;
+            // 
+            // Adress
+            // 
+            this.Adress.HeaderText = "Адрес";
+            this.Adress.Name = "Adress";
+            this.Adress.Width = 150;
+            // 
+            // Identity
+            // 
+            this.Identity.HeaderText = "Идентификатор";
+            this.Identity.Name = "Identity";
+            this.Identity.Width = 150;
+            // 
+            // Connect
+            // 
+            this.Connect.HeaderText = "Соединение";
+            this.Connect.Name = "Connect";
+            this.Connect.Width = 150;
             // 
             // label1
             // 
@@ -270,6 +288,7 @@
             this.button2.TabIndex = 7;
             this.button2.Text = "История взаимодействия";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.Button2_Click);
             // 
             // button3
             // 
@@ -281,24 +300,6 @@
             this.button3.Text = "Добавить новое подключение";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.Button3_Click);
-            // 
-            // Adress
-            // 
-            this.Adress.HeaderText = "Адрес";
-            this.Adress.Name = "Adress";
-            this.Adress.Width = 150;
-            // 
-            // Identity
-            // 
-            this.Identity.HeaderText = "Идентификатор";
-            this.Identity.Name = "Identity";
-            this.Identity.Width = 150;
-            // 
-            // Connect
-            // 
-            this.Connect.HeaderText = "Соединение";
-            this.Connect.Name = "Connect";
-            this.Connect.Width = 150;
             // 
             // Main
             // 
@@ -316,7 +317,8 @@
             this.Controls.Add(this.connections);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Main";
-            this.Text = "Main";
+            this.Text = "+";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Main_FormClosed);
             this.Load += new System.EventHandler(this.Main_Load);
             this.connections.ResumeLayout(false);
             this.offlineConnections.ResumeLayout(false);

@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 using MySql.Data.MySqlClient;
 using System.Net.NetworkInformation;
-using System.IO;
-using System.Data.Common;
 using System.Data;
 
 
@@ -55,15 +49,6 @@ namespace Antenna
             return fullstr;
         }
 
-        private static MySqlDataReader QueryEmployee(MySqlConnection conn)
-        {
-            string sql = "SELECT id_model_of_equip, m_equip, name_of_model_id, types_id,count_model FROM model_of equip;";
-            // объект для выполнения SQL-запроса
-            MySqlCommand command = new MySqlCommand(sql, conn);
-            // объект для чтения ответа сервера
-            MySqlDataReader reader = command.ExecuteReader();
-            return reader;
-        }
 
         public DataTable exportFromBase(string select, string from, string where,  MySqlConnection connection)
         {
@@ -74,20 +59,6 @@ namespace Antenna
             dt.Load(cmd.ExecuteReader());
             connection.Close();
             return dt;
-        }
-
-        public void insertIntoTabelEquip(string model, string name_model, string type_model, string count_model, MySqlConnection connection)
-        {
-            string sql = "insert_model_procedure";
-            MySqlCommand cmd = new MySqlCommand(sql, connection);
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@model", model);
-            cmd.Parameters.AddWithValue("@name_model", name_model);
-            cmd.Parameters.AddWithValue("@type_model", type_model);
-            cmd.Parameters.AddWithValue("@count_model_fromapp", count_model);
-            connection.Open();
-            cmd.ExecuteNonQuery();
-            connection.Close();
         }
 
         public void deleteRowInTable(string from, string where, MySqlConnection connection)
