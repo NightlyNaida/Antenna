@@ -43,11 +43,7 @@ namespace Antenna
         ////////////////////
 
 
-        private void Label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
+   
         private void Button_LetsConnection_click(object sender, EventArgs e)
         {
             label_TryConnection.Visible = true;
@@ -121,17 +117,6 @@ namespace Antenna
         }
 
  
-
-
-        private void Label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void StatusStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
-        }
 
         private void Form1_Shown(object sender, EventArgs e)
         {

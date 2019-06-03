@@ -51,7 +51,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(443, 150);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView1_CellContentClick);
-            this.dataGridView1.Leave += new System.EventHandler(this.DataGridView1_Leave);
             // 
             // COM_Port
             // 
@@ -85,7 +84,6 @@
             this.label_CountSearchedValue.Size = new System.Drawing.Size(26, 27);
             this.label_CountSearchedValue.TabIndex = 6;
             this.label_CountSearchedValue.Text = "0";
-            this.label_CountSearchedValue.Click += new System.EventHandler(this.Label3_Click);
             // 
             // label_CountSearched
             // 
@@ -97,7 +95,6 @@
             this.label_CountSearched.Size = new System.Drawing.Size(130, 19);
             this.label_CountSearched.TabIndex = 5;
             this.label_CountSearched.Text = "Найдено антенн";
-            this.label_CountSearched.Click += new System.EventHandler(this.Label4_Click);
             // 
             // button_AddConnection
             // 
@@ -135,7 +132,6 @@
             this.Controls.Add(this.dataGridView1);
             this.Name = "AddConnection";
             this.Text = "AddConnection";
-            this.Load += new System.EventHandler(this.AddConnection_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Load_Animation)).EndInit();
             this.ResumeLayout(false);

@@ -2,39 +2,38 @@
 using System.ComponentModel;
 using System.Windows.Forms;
 using System.IO.Ports;
+using MySql.Data.MySqlClient;
+using System.Management;
 
 namespace Antenna
 {
     public partial class AddConnection : Form
     {
-        SerialPort[] ports = new SerialPort[20];
-        WorkWithArduino workWithArduino;
-        BackgroundWorker bw1 = new BackgroundWorker();
+        SerialPort[] ports = new SerialPort[20]; //Массив портов, куда записываются найденные адрес АС;
+
+        WorkWithArduino workWithArduino; //Класс взаимодействия с платами Arduino
+        Gamma gamma = new Gamma(); //Класс для шифрования и дешифрования данных
+        WorkWithDB withDB = new WorkWithDB();//Класс для взаимодействия с базой данных
+        WorkWithClient withClient = new WorkWithClient();//Класс для взаимодействия с аппратной част
+
+        BackgroundWorker bw1 = new BackgroundWorker(); // Объект для фонового выполнения инструкций
+
+
+        MySqlConnection connection = new MySqlConnection();
        
 
-        public AddConnection()
+        public AddConnection(MySqlConnection mySqlConnection)
+
         {
+            connection = mySqlConnection;
             InitializeComponent();
         }
 
-        private void Label4_Click(object sender, EventArgs e)
-        {
 
-        }
-
-        private void Label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void AddConnection_Load(object sender, EventArgs e)
-        {
-
-        }
 
         private void Button_Search_Click(object sender, EventArgs e)
         {
-            bw1.DoWork += (ea, obj) => searchArduino();
+            bw1.DoWork += (ea, obj) => searchArduino();//
             bw1.RunWorkerCompleted += (ea, obj) => shwowArd();
             bw1.RunWorkerAsync();
             button_Search.Enabled = false;
@@ -42,7 +41,7 @@ namespace Antenna
             label_CountSearched.Text = "Ищу Arduino";
 
         }
-
+      
         private void searchArduino()
         {
             workWithArduino = new WorkWithArduino();
@@ -83,19 +82,11 @@ namespace Antenna
             pictureBox_Load_Animation.Visible = false;//убираем анимацию загрузки
         }
 
-        private void Background_Worker_RunWorkerCompleted(object sender, DoWorkEventArgs e)
-        {
-
-        }
-
         private void DataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             button_AddConnection.Enabled = true;
         }
 
-        private void DataGridView1_Leave(object sender, EventArgs e)
-        {
-        }
 
         private void Button_AddConnection_Click(object sender, EventArgs e)
         {
@@ -115,7 +106,8 @@ namespace Antenna
 
             if (searchDoublicate == false)
             {
-                father.dataGridView_Connections.Rows.Add(dataGridView1.CurrentRow.Cells[0].Value, dataGridView1.CurrentRow.Cells[1].Value, null);
+                withDB.insertAntennaInTable("antennas", dataGridView1.CurrentRow.Cells[1].Value.ToString().Replace("\r", ""),
+                "name", dataGridView1.CurrentRow.Cells[0].Value.ToString(), "1", withClient.getProcessorId(), connection);
                 father.Show();
                 this.Close();
             }

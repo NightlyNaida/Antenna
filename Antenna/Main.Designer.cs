@@ -31,9 +31,6 @@
             this.connections = new System.Windows.Forms.TabControl();
             this.offlineConnections = new System.Windows.Forms.TabPage();
             this.dataGridView_Connections = new System.Windows.Forms.DataGridView();
-            this.Adress = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Identity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Connect = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -51,10 +48,16 @@
             this.label6 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
+            this.Adress = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Identity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Connection = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pictureBox_Load_Animation = new System.Windows.Forms.PictureBox();
+            this.label_load_Animation = new System.Windows.Forms.Label();
             this.connections.SuspendLayout();
             this.offlineConnections.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Connections)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Load_Animation)).BeginInit();
             this.SuspendLayout();
             // 
             // connections
@@ -68,6 +71,8 @@
             // 
             // offlineConnections
             // 
+            this.offlineConnections.Controls.Add(this.label_load_Animation);
+            this.offlineConnections.Controls.Add(this.pictureBox_Load_Animation);
             this.offlineConnections.Controls.Add(this.dataGridView_Connections);
             this.offlineConnections.Location = new System.Drawing.Point(4, 22);
             this.offlineConnections.Name = "offlineConnections";
@@ -83,29 +88,13 @@
             this.dataGridView_Connections.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Adress,
             this.Identity,
-            this.Connect});
+            this.Connection});
             this.dataGridView_Connections.Location = new System.Drawing.Point(6, 6);
             this.dataGridView_Connections.Name = "dataGridView_Connections";
+            this.dataGridView_Connections.ReadOnly = true;
             this.dataGridView_Connections.Size = new System.Drawing.Size(466, 503);
             this.dataGridView_Connections.TabIndex = 0;
-            // 
-            // Adress
-            // 
-            this.Adress.HeaderText = "Адрес";
-            this.Adress.Name = "Adress";
-            this.Adress.Width = 150;
-            // 
-            // Identity
-            // 
-            this.Identity.HeaderText = "Идентификатор";
-            this.Identity.Name = "Identity";
-            this.Identity.Width = 150;
-            // 
-            // Connect
-            // 
-            this.Connect.HeaderText = "Соединение";
-            this.Connect.Name = "Connect";
-            this.Connect.Width = 150;
+            this.dataGridView_Connections.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView_Connections_CellContentClick);
             // 
             // label1
             // 
@@ -301,6 +290,50 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.Button3_Click);
             // 
+            // Adress
+            // 
+            this.Adress.HeaderText = "Адрес";
+            this.Adress.Name = "Adress";
+            this.Adress.ReadOnly = true;
+            this.Adress.Width = 150;
+            // 
+            // Identity
+            // 
+            this.Identity.HeaderText = "Идентификатор";
+            this.Identity.Name = "Identity";
+            this.Identity.ReadOnly = true;
+            this.Identity.Width = 150;
+            // 
+            // Connection
+            // 
+            this.Connection.HeaderText = "Соединение";
+            this.Connection.Name = "Connection";
+            this.Connection.ReadOnly = true;
+            this.Connection.Width = 130;
+            // 
+            // pictureBox_Load_Animation
+            // 
+            this.pictureBox_Load_Animation.Image = global::Antenna.Properties.Resources._30;
+            this.pictureBox_Load_Animation.Location = new System.Drawing.Point(154, 223);
+            this.pictureBox_Load_Animation.Name = "pictureBox_Load_Animation";
+            this.pictureBox_Load_Animation.Size = new System.Drawing.Size(172, 40);
+            this.pictureBox_Load_Animation.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox_Load_Animation.TabIndex = 9;
+            this.pictureBox_Load_Animation.TabStop = false;
+            this.pictureBox_Load_Animation.Visible = false;
+            // 
+            // label_load_Animation
+            // 
+            this.label_load_Animation.AutoSize = true;
+            this.label_load_Animation.Font = new System.Drawing.Font("Aktiv Grotesk Corp", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label_load_Animation.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.label_load_Animation.Location = new System.Drawing.Point(146, 266);
+            this.label_load_Animation.Name = "label_load_Animation";
+            this.label_load_Animation.Size = new System.Drawing.Size(191, 21);
+            this.label_load_Animation.TabIndex = 10;
+            this.label_load_Animation.Text = "Загружаю таблицу...";
+            this.label_load_Animation.Visible = false;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -320,11 +353,14 @@
             this.Text = "+";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Main_FormClosed);
             this.Load += new System.EventHandler(this.Main_Load);
+            this.Shown += new System.EventHandler(this.Main_Shown);
             this.connections.ResumeLayout(false);
             this.offlineConnections.ResumeLayout(false);
+            this.offlineConnections.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Connections)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Load_Animation)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -354,6 +390,8 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Adress;
         private System.Windows.Forms.DataGridViewTextBoxColumn Identity;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Connect;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Connection;
+        private System.Windows.Forms.Label label_load_Animation;
+        private System.Windows.Forms.PictureBox pictureBox_Load_Animation;
     }
 }

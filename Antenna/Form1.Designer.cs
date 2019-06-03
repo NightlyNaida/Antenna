@@ -57,7 +57,6 @@
             this.label_for_login_textBox.Size = new System.Drawing.Size(56, 20);
             this.label_for_login_textBox.TabIndex = 1;
             this.label_for_login_textBox.Text = "Логин";
-            this.label_for_login_textBox.Click += new System.EventHandler(this.Label1_Click);
             // 
             // label_for_password_textBox
             // 
@@ -100,7 +99,7 @@
             this.statusStrip1.Size = new System.Drawing.Size(389, 22);
             this.statusStrip1.TabIndex = 7;
             this.statusStrip1.Text = "statusStrip1";
-            this.statusStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.StatusStrip1_ItemClicked);
+
             // 
             // password_textBox
             // 

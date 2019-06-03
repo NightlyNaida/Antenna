@@ -8,11 +8,11 @@ namespace Antenna
 {
     class Gamma
     {
-        static private string alf = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя 0123456789";
+        static private string alf = "0123456789";
         static private int k, x, z;
         static private string res;
 
-        static public string Encryption(string source, string key)
+        public string Encryption(string source, string key)
         {
             res = string.Empty;
 
@@ -23,10 +23,10 @@ namespace Antenna
             }
             for (int i = 0; i < source.Length; i++)
             {
-                for (int id = 0; id < alf.Length; id++)
+                for (int j = 0; j < alf.Length; j++)
                 {
-                    if (key[i] == alf[id]) k = id;
-                    if (source[i] == alf[id]) x = id;
+                    if (key[i] == alf[j]) k = j;
+                    if (source[i] == alf[j]) x = j;
                     z = (x + k) % alf.Length;
                 }
                 res += alf[z];
@@ -34,7 +34,7 @@ namespace Antenna
             return res;
         }
 
-        static public string Decryption(string source, string key)
+        public string Decryption(string source, string key)
         {
             res = string.Empty;
 
@@ -57,4 +57,4 @@ namespace Antenna
         }
     }
 }
-}
+
